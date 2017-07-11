@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>File Upload（picture）</title>
+  <style>
+  #header{
+  background-color:black;
+  color:white;
+  text-align:center;
+  font-size:30px;
+  padding:5px;
+  
+}
+#header2{
+  color:black;
+  font-size:10px;
+  text_align:left;
+}
+
+#body {
+      
+    	float:left;
+  		color:#696969;
+      padding: 100px；
+  		font-size:10px; 
+      width:1000px;  
+ 
+}
+
+#footer{
+  background-color:black;
+  color:white;
+  text-align:center;
+  font-size:15px;
+  clear:both;
+  padding:10px;
+}
+</style>
+<script type="text/javascript">            
+            //判断浏览器是否支持FileReader接口
+            if (typeof FileReader == 'undefined') {
+                document.getElementById("xmTanDiv").InnerHTML = "<h1>当前浏览器不支持FileReader接口</h1>";
+                //使选择控件不可操作
+                document.getElementById("xdaTanFileImg").setAttribute("disabled", "disabled");
+            }
+
+            //选择图片，马上预览
+            function xmTanUploadImg(obj) {
+                var file = obj.files[0];
+                
+                console.log(obj);console.log(file);
+                console.log("file.size = " + file.size);  //file.size 单位为byte
+
+                var reader = new FileReader();
+
+                
+                reader.onload = function (e) {
+                  
+                    var img = document.getElementById("xmTanImg");
+                    img.src = e.target.result;
+                    
+                }
+
+                reader.readAsDataURL(file)
+            }
+        </script>
+
+</head>
+
+<body>
+<div id="header">
+<h1>File Upload</h1>
+</div>
+<div id="header2">
+<h1>Please choose the file that you want to upload</h1>
+</div>
+<div id="body">
+ <p>
+ <input type="file" id="xdaTanFileImg" onchange="xmTanUploadImg(this)" accept="image/*"/>
+</p>
+            <img id="xmTanImg"/>
+            <div id="xmTanDiv"></div>
+<input type="button" value="Submit" onclick=alert('Done')>
+<br><br>
+</div>  
+
+<div id="footer">
+2017/07/11 PracticalTest 
+</div>
+</body>
+</html>
